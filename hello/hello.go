@@ -2,17 +2,27 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/kmz122/greetings"
-	"rsc.io/quote/v4"
 )
 
-func greeting(name string) string {
-	return fmt.Sprintf("Hello %s! Happy learning Go.", name)
-}
-
 func main() {
-	fmt.Println(greeting("Kyi Myo Zaw"))
-	fmt.Println(quote.Go())
-	fmt.Println(greetings.Hello("Kyi"))
+	// Set properties of the predefined Logger, including
+	// the log entry prefix and a flag to disable printing
+	// the time, source file, and line number.
+	log.SetPrefix("greetings: ")
+	log.SetFlags(0)
+
+	// Request a greeting message.
+	message, err := greetings.Hello("")
+	// If an error was returned, print it to the console and
+	// exit the program.
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// If no error was returned, print the returned message
+	// to the console.
+	fmt.Println(message)
 }
